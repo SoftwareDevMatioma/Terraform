@@ -20,10 +20,15 @@ provider "azurerm" {
 data "azurerm_client_config" "client" {
 }
 
-resource "azurerm_role_assignment" "azurerm_role" {
-  for_each = {for ra in var.role_assigments:  ra.name => ra}
 
-  name                 = each.value.name
+resource "random_uuid" "uuid" {
+  for_each = { for ra in var.role_assigments : ra.name => ra }
+}
+
+resource "azurerm_role_assignment" "azurerm_role" {
+  for_each = { for ra in var.role_assigments : ra.name => ra }
+
+  name                 = random_uuid.uuid[each.value.name].result
   scope                = each.value.scope_id
   role_definition_name = each.value.role_name
   principal_id         = each.value.principal_id
