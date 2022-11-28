@@ -36,12 +36,6 @@ resource "azurerm_linux_web_app" "web_app" {
   zip_deploy_file = var.zip_deploy_file
 
   app_settings = var.app_settings
-
-  # lifecycle {
-  #   replace_triggered_by = [
-  #     zip_deploy_file
-  #   ]
-  # }
 }
 
 
