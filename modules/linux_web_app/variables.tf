@@ -49,3 +49,9 @@ variable "startup_command" {
   type = string
   default = null
 }
+
+variable "app_settings" {
+  description ="App settings block for the Application "
+  type = map
+  default = null
+}
