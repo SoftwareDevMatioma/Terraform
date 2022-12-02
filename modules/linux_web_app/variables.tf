@@ -55,3 +55,9 @@ variable "app_settings" {
   type = map
   default = null
 }
+
+variable "enable_managed_identity"{
+  description = "check if the Managed Identity should be enabled"
+  type = bool
+  default = true
+}

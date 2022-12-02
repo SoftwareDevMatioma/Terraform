@@ -35,6 +35,13 @@ resource "azurerm_linux_web_app" "web_app" {
   }
   zip_deploy_file = var.zip_deploy_file
 
+  dynamic "identity"{
+    for_each  = var.enable_managed_identity == true ? [1] : [0]
+    content{
+      type = "SystemAssigned"
+    }
+  }
+
   app_settings = var.app_settings
 }
 
